@@ -24,6 +24,8 @@ Then rebuild the engine, as below.
 
 ### What you need
 
+**Outlast Source code.** What this patch is designed for. Find the source at your own risk, and do not redistribute it.
+
 **[Visual Studio 2012.](https://archive.org/download/en_visual_studio_professional_2012_x86_dvd_2262334)** The build tool finds the compiler through the `VS110COMNTOOLS` environment variable, which only VS2012 sets. VS2010 and anything newer will not be found.
 
 **[DirectX SDK (June 2010).](https://www.microsoft.com/en-gb/download/details.aspx?id=8109)** The last one Microsoft shipped, and the one this engine wants. The build tool finds it through `DXSDK_DIR`. You can tell it is the right version because `Binaries\Win64` ships `D3DX9_43.dll`, which is that SDK's runtime.
@@ -76,3 +78,11 @@ Every package written in retail format logs a line to the build log.
 ### Blanket switch
 
 A bare `-SaveAsRetail` with no list applies to every package the process saves. Use it only when you mean everything.
+
+## Credits
+
+- **Epic Games** - Unreal Engine 3, the engine this patch modifies.
+
+- **Red Barrels** - Outlast, the game this patch is designed for.
+
+- **[Outlast Modding Community](https://discord.gg/hPYAappJSM)** - The wonderful people in the community who this is for, and for being a great help in learning how to mod Outlast in the first place.
