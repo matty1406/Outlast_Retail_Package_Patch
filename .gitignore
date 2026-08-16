@@ -1,0 +1,35 @@
+# Build output
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.dll
+*.exe
+*.res
+Binaries/
+Intermediate/
+Development/Intermediate/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+*.ncb
+*.aps
+
+# Perforce
+*.p4ignore
+.p4config
+
+# Editor / OS junk
+*.bak
+*.tmp
+*~
+Thumbs.db
+desktop.ini
+.DS_Store
