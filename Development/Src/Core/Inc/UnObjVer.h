@@ -671,12 +671,13 @@ extern INT			GEngineMatchmakingVersion;		// Version for matchmaking
 // layered on top of the normal save path - it does not change how the game's own
 // (native) content is packaged when the toggle is off.
 //
-// Outlast retail target: Version 867 / LicenseeVersion 3 / Engine 10907.
-// (Licensee 3 matches retail exactly - lossless, and still <= retail so it loads.)
+// Outlast retail target: Version 868 / LicenseeVersion 3 / Engine 12046, exactly what the
+// retail exe (changelist 22533) reports and stamps its own packages with. Earlier builds of
+// this patch used 867 / 3 / 10907; those packages still load, since retail accepts <= 868.
 //
-#define VER_RETAIL_PACKAGE_FILE		867
+#define VER_RETAIL_PACKAGE_FILE		868
 #define VER_RETAIL_PACKAGE_LICENSEE	3
-#define VER_RETAIL_ENGINE_VERSION		10907
+#define VER_RETAIL_ENGINE_VERSION		12046
 
 extern UBOOL		GbForceRetailPackageVersion;	// Master toggle. FALSE = normal engine save.
 extern INT			GForcedPackageFileVersion;		// Epic file version stamped when toggled on.

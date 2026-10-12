@@ -5532,6 +5532,10 @@ void appInit( const TCHAR* InCmdLine, FOutputDevice* InLog, FOutputDeviceConsole
 	USystem::StaticClass()->Link(DummyAr,FALSE);
 	DefaultSystemObject->LoadConfig(NULL,NULL,UE3::LCPF_ReadParentSections);
 
+	// Outlast Retail Package Patch - announce the patch on every run, so a log shows at a glance that it is built in.
+	warnf( TEXT("Outlast Retail Package Patch: installed. Retail target %d / %d / engine %d, with retail shader layout and retail cooker data support."),
+		VER_RETAIL_PACKAGE_FILE, VER_RETAIL_PACKAGE_LICENSEE, VER_RETAIL_ENGINE_VERSION );
+
 	// Outlast Retail Package Patch - honor -SaveAsRetail on the command line so the make
 	// and cook commandlets (separate processes the editor menu can't reach) also stamp and
 	// serialize packages at the retail version. See UnObjVer.h / ULinkerSave.
@@ -5554,6 +5558,10 @@ void appInit( const TCHAR* InCmdLine, FOutputDevice* InLog, FOutputDeviceConsole
 		appSetRetailPackageFilter( NULL );
 		warnf( TEXT("Outlast Retail Package Patch: -SaveAsRetail active for ALL packages; saving at %d / %d / engine %d."),
 			GForcedPackageFileVersion, GForcedPackageLicenseeVersion, GForcedEngineVersion );
+	}
+	else
+	{
+		warnf( TEXT("Outlast Retail Package Patch: retail format is OFF for this run. Pass -SaveAsRetail, or use File > Save as Outlast Retail Package in the editor.") );
 	}
 
 	UBOOL bUseSeekFreePCPaths = FALSE;

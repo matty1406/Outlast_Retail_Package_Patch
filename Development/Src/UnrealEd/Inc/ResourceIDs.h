@@ -65,7 +65,7 @@ enum
 	IDM_SAVE_DLG,
 	IDM_FORCE_SAVE_ALL,
 	IDM_SAVE_ALL_LEVELS,
-	IDM_SAVE_AS_RETAIL,		// Checkable: save packages at Outlast retail version (867/3/10907)
+	IDM_SAVE_AS_RETAIL,		// Checkable: save packages at Outlast retail version (868/3/12046)
 
 	// File / Switch Render Mode
 	IDM_EDITOR_PREFERENCES_RENDER_MODE_MENU,

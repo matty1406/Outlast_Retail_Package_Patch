@@ -405,7 +405,7 @@ WxMainMenu::WxMainMenu()
 		FileMenu->Append( IDM_SAVE_ALL_WRITABLE, *LocalizeUnrealEd("SaveAllWritable"), *LocalizeUnrealEd("ToolTip_SaveAllWritable") );
 		FileMenu->Append( IDM_FORCE_SAVE_ALL, *LocalizeUnrealEd("ForceSaveAll"), *LocalizeUnrealEd("ToolTip_ForceSaveAll") );
 		FileMenu->AppendSeparator();
-		FileMenu->AppendCheckItem( IDM_SAVE_AS_RETAIL, TEXT("Save as Outlast Retail Package (v867)"), TEXT("When checked, saved packages are stamped and serialized at the Outlast retail version 867 / licensee 3 / engine 10907 instead of the current engine version.") );
+		FileMenu->AppendCheckItem( IDM_SAVE_AS_RETAIL, TEXT("Save as Outlast Retail Package (v868)"), TEXT("When checked, saved packages are stamped and serialized at the Outlast retail version 868 / licensee 3 / engine 12046 instead of the current engine version.") );
 		FileMenu->AppendSeparator();
 
 		// Add render modes to the menu
@@ -2419,7 +2419,7 @@ void WxEditorFrame::MenuFileForceSaveAll( wxCommandEvent& In )
 /**
  * Outlast Retail Package Patch - toggles retail-compatible package versioning.
  * When enabled, subsequent package saves are stamped and serialized at the Outlast
- * retail version (867 / 3 / 10907) instead of the current engine version.
+ * retail version (868 / 3 / 12046) instead of the current engine version.
  * See UnObjVer.h / ULinkerSave.
  */
 void WxEditorFrame::MenuFileSaveAsRetail( wxCommandEvent& In )

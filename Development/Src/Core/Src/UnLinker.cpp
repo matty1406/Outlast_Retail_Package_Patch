@@ -5138,8 +5138,6 @@ ULinkerSave::ULinkerSave( UPackage* InParent, const TCHAR* InFilename, UBOOL bFo
 		Summary.EngineVersion =	GForcedEngineVersion;
 		SetVer( GForcedPackageFileVersion );
 		SetLicenseeVer( GForcedPackageLicenseeVersion );
-		debugf( TEXT("Outlast Retail Package Patch: saving '%s' at %d / %d / engine %d."),
-			*RetailPackageName, GForcedPackageFileVersion, GForcedPackageLicenseeVersion, GForcedEngineVersion );
 	}
 	else
 	{
@@ -5198,8 +5196,6 @@ ULinkerSave::ULinkerSave( UPackage* InParent, UBOOL bForceByteSwapping )
 		Summary.EngineVersion =	GForcedEngineVersion;
 		SetVer( GForcedPackageFileVersion );
 		SetLicenseeVer( GForcedPackageLicenseeVersion );
-		debugf( TEXT("Outlast Retail Package Patch: saving '%s' at %d / %d / engine %d."),
-			*RetailPackageName, GForcedPackageFileVersion, GForcedPackageLicenseeVersion, GForcedEngineVersion );
 	}
 	else
 	{
