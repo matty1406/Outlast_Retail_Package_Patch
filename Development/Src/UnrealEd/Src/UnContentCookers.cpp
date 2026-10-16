@@ -13967,8 +13967,43 @@ INT UCookPackagesCommandlet::Main( const FString& Params )
 					}
 
 					ShaderCache = NULL;
-					PrepPackageForObjectCooking(Package, bShouldBeSeekFree, bShouldBeFullyCompressed, 
+					PrepPackageForObjectCooking(Package, bShouldBeSeekFree, bShouldBeFullyCompressed,
 						bIsNativeScriptFile, bIsCombinedStartupPackage, bStripEverythingButTextures, TRUE);
+
+					// Materials on skeletal meshes need bUsedWithSkeletalMesh, or the game draws the default material instead.
+					// The editor only sets it when it draws the mesh, which a cook never does, so set it on the copy saved here
+					// before PrepareForSaving compiles its shaders. The source package is left as it was.
+					for( FObjectIterator It; It; ++It )
+					{
+						UObject* Object = *It;
+						if( Object->IsIn( Package ) || Object->HasAnyFlags( RF_ForceTagExp ) )
+						{
+							USkeletalMeshComponent* SkeletalMeshComponent = Cast<USkeletalMeshComponent>( Object );
+							USkeletalMesh* SkeletalMesh = Cast<USkeletalMesh>( Object );
+
+							TArray<UMaterialInterface*> SkeletalMaterials;
+							if( SkeletalMeshComponent )
+							{
+								SkeletalMaterials = SkeletalMeshComponent->Materials;
+							}
+							else if( SkeletalMesh )
+							{
+								SkeletalMaterials = SkeletalMesh->Materials;
+							}
+
+							for( INT MaterialIndex = 0; MaterialIndex < SkeletalMaterials.Num(); MaterialIndex++ )
+							{
+								UMaterialInterface* MaterialInterface = SkeletalMaterials(MaterialIndex);
+								UMaterial* BaseMaterial = MaterialInterface ? MaterialInterface->GetMaterial() : NULL;
+
+								// Only a material saved in this package keeps the flag.
+								if( BaseMaterial && !BaseMaterial->bUsedWithSkeletalMesh && ( BaseMaterial->IsIn( Package ) || BaseMaterial->HasAnyFlags( RF_ForceTagExp ) ) )
+								{
+									MaterialInterface->CheckMaterialUsage( MATUSAGE_SkeletalMesh );
+								}
+							}
+						}
+					}
 
 					// We need to process Landscape objects first, as we need their texture data before it's cooked.
 					for( TObjectIterator<ULandscapeComponent> It; It; ++It )
