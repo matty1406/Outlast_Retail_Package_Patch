@@ -10757,8 +10757,9 @@ TArray<FPackageCookerInfo> UCookPackagesCommandlet::GeneratePackageList( INT& Fi
 			else if ( DLCName.Len() )
 			{
 				// skip over any startup (which prolly haven't been loaded, but just in case), and script files
-				// @todo: need to handle a command-line specified script package for code-only mods!
-				if ( bIsCombinedStartupPackage || bIsScriptFile)
+				// Retail Patch: except a script package named on the command line, which is cooked standalone
+				// seekfree with everything its classes reference, the way a native script package is.
+				if ( bIsCombinedStartupPackage || (bIsScriptFile && !bIsTokenScriptPackage))
 				{
 					continue;
 				}
@@ -13729,7 +13730,10 @@ INT UCookPackagesCommandlet::Main( const FString& Params )
 					if ( !bCookingPS3Mod )
 					{
 						// Don't append the seekfree suffix when cooking non-map, content-only mods.
-						const FString CookedPackageName = (DLCName.Len() && !bIsTokenMap && !bIsTokenScriptPackage && bIsTokenContentPackage) ? Package->GetName() : Package->GetName() + STANDALONE_SEEKFREE_SUFFIX;
+						// Retail Patch: nor a script package named on the command line, so it keeps the name its
+						// mods import it by. (The token flags above are only filled in for PS3 mods.)
+						const UBOOL bModScriptPackage = DLCName.Len() && TokenScriptPackages.ContainsItem(SrcFilename);
+						const FString CookedPackageName = ((DLCName.Len() && !bIsTokenMap && !bIsTokenScriptPackage && bIsTokenContentPackage) || bModScriptPackage) ? Package->GetName() : Package->GetName() + STANDALONE_SEEKFREE_SUFFIX;
 						warnf( NAME_Log, TEXT("Cooking [Seekfree Standalone] %s from %s"), *CookedPackageName, *PackageName);
 
 						// create the new package to cook into

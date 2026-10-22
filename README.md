@@ -41,7 +41,7 @@ Development\Src\UnrealEd\Src\UnContentCookers.cpp
 
 The `Engine` files make shaders saved in retail format match retail's layout. The source contains Xbox One shader parameters that retail does not have, so without them retail throws those shaders away.
 
-The `UnContentCookers` files let a map cook use retail's own cooker data, so your map shares retail's textures instead of copying them. They also flag materials used on skeletal meshes, such as cloth and curtains, so retail draws them instead of the default material.
+The `UnContentCookers` files let a map cook use retail's own cooker data, so your map shares retail's textures instead of copying them. They also flag materials used on skeletal meshes, such as cloth and curtains, so retail draws them instead of the default material. And a script package named on a `-DLCName` cook's command line is now cooked, under its own name and with the content its classes reference inside it, instead of being skipped.
 
 Then rebuild the engine, as below.
 
