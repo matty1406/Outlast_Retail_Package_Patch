@@ -13744,7 +13744,10 @@ INT UCookPackagesCommandlet::Main( const FString& Params )
 						Package->MakeNewGuid();
 						// copy networking package flags from original
 						Package->PackageFlags |= SourcePackage->PackageFlags & (PKG_AllowDownload | PKG_ClientOptional | PKG_ServerSideOnly);
-						if (!(Package->PackageFlags & PKG_ServerSideOnly))
+						// Retail Patch: a package that keeps its own name is the source package itself, whose
+						// net info already counts the NetIndex its objects were loaded with. Emptying it saved a
+						// net object count of 0, and the game then logged every object as having an invalid NetIndex.
+						if (!(Package->PackageFlags & PKG_ServerSideOnly) && Package != SourcePackage)
 						{
 							Package->CreateEmptyNetInfo();
 						}
