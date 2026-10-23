@@ -2245,6 +2245,11 @@ UBOOL UObject::SavePackage( UPackage* InOuter, UObject* Base, EObjectFlags TopLe
 					ImportTagger.SetPortFlags(ComparisonFlags);
 					ImportTagger.SetFilterEditorOnly(FilterEditorOnly);
 
+					// Outlast Retail Package Patch - collect names at the version the save writes,
+					// so a name only retail format writes (a renamed property) is in the name map.
+					ImportTagger.SetVer( ((FArchive*)Linker)->Ver() );
+					ImportTagger.SetLicenseeVer( ((FArchive*)Linker)->LicenseeVer() );
+
 					UClass* Class = Obj->GetClass();
 
 					if ( Obj->HasAnyFlags(RF_ClassDefaultObject) )

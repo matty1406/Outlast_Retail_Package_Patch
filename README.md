@@ -17,7 +17,7 @@ This source saves packages at **882 / licensee 3 / engine 12620**. The retail ex
 
 ## Install
 
-Copy the `Development` folder into `<engine root>\UnrealEngine3\` and let it merge over these 17 files:
+Copy the `Development` folder into `<engine root>\UnrealEngine3\` and let it merge over these 18 files:
 
 ```
 Development\Src\Core\Inc\UnObjVer.h
@@ -25,6 +25,7 @@ Development\Src\Core\Src\UnObjVer.cpp
 Development\Src\Core\Src\UnLinker.cpp
 Development\Src\Core\Src\UnMisc.cpp
 Development\Src\Core\Src\SavePackage.cpp
+Development\Src\Core\Src\UnClass.cpp
 Development\Src\Engine\Inc\ShaderManager.h
 Development\Src\Engine\Inc\LightMapRendering.h
 Development\Src\Engine\Src\BasePassRendering.h
@@ -38,6 +39,8 @@ Development\Src\UnrealEd\Inc\UnContentCookers.h
 Development\Src\UnrealEd\Src\EditorFrame.cpp
 Development\Src\UnrealEd\Src\UnContentCookers.cpp
 ```
+
+`UnClass.cpp` saves properties this source renamed under the names retail knows, so a resized sound connector keeps its size in retail. It reads them back under this source's names too.
 
 The `Engine` files make shaders saved in retail format match retail's layout. The source contains Xbox One shader parameters that retail does not have, so without them retail throws those shaders away.
 
